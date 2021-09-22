@@ -1,19 +1,17 @@
 package com.bridgelabz.hotelreservationsystem;
 
 public class Hotel {
-    String hotelName;
-    String hotelNumber;
-    int weekDayRates;
-    int weekendDayRates;
+    private String hotelName;
+    private int rating;
+    private long regularCustomerCost;
 
     public Hotel() {
     }
 
-    public Hotel(String hotelName, String hotelNumber, int weekDayRates, int weekendDayRates) {
+    public Hotel(String hotelName, int rating, long regularCustomerCost) {
         this.hotelName = hotelName;
-        this.hotelNumber = hotelNumber;
-        this.weekDayRates = weekDayRates;
-        this.weekendDayRates = weekendDayRates;
+        this.rating = rating;
+        this.regularCustomerCost = regularCustomerCost;
     }
 
     public String getHotelName() {
@@ -24,27 +22,25 @@ public class Hotel {
         this.hotelName = hotelName;
     }
 
-    public String getHotelNumber() {
-        return hotelNumber;
+    public int getRating() {
+        return rating;
     }
 
-    public void setHotelNumber(String hotelNumber) {
-        this.hotelNumber = hotelNumber;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
-    public int getWeekDayRates() {
-        return weekDayRates;
+    public long getRegularCustomerCost() {
+        return regularCustomerCost;
     }
 
-    public void setWeekDayRates(int weekDayRates) {
-        this.weekDayRates = weekDayRates;
+    public void setRegularCustomerCost(long regularCustomerCost) {
+        this.regularCustomerCost = regularCustomerCost;
     }
 
-    public int getWeekendDayRates() {
-        return weekendDayRates;
+    @Override
+    public String toString() {
+        return "Hotels [hotelName=" + hotelName + ", rating=" + rating + ", Regular Customer Cost=" + regularCustomerCost + "]\n";
     }
 
-    public void setWeekendDayRates(int weekendDayRates) {
-        this.weekendDayRates = weekendDayRates;
-    }
 }

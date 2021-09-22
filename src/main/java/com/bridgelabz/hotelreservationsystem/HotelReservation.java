@@ -1,29 +1,42 @@
 package com.bridgelabz.hotelreservationsystem;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
-public class HotelReservation {
-    Map<String, Hotel> hotelMap = new HashMap<String, Hotel>();
+public class HotelReservation implements HotelReservationIF {
+
+    ArrayList<Hotel> hotelList = new ArrayList<Hotel>();
     Hotel hotel;
 
-    public boolean addHotel(String hotelNumber, String hotelName, int weekDayRates, int weekendDayRates) {
+    public void addHotel(String hotelName, int rating, long regularCustomerRate) {
+
         hotel = new Hotel();
-        hotel.hotelNumber = hotelNumber;
         hotel.setHotelName(hotelName);
-        hotel.setWeekendDayRates(weekendDayRates);
-        hotel.setWeekDayRates(weekDayRates);
-        hotelMap.put(hotelNumber, hotel);
-        return true;
+        hotel.setRating(rating);
+        hotel.setRegularCustomerCost(regularCustomerRate);
+
+        hotelList.add(hotel);
+        System.out.println("Successfully ADDED !!");
     }
 
-    public void displayHotels() {
-        for (Map.Entry<String, Hotel> entry : hotelMap.entrySet()) {
-            String key = entry.getKey();
-            Hotel value = entry.getValue();
-            System.out.println("======== " + key + " ========");
-            System.out.println("\t\t Hotel name:" + value.hotelName +
-                    "\n\t\t rates:  Weekday Rates-" + value.weekDayRates + "\t Weekend days:" + value.weekendDayRates);
-        }
+    public int getHotelListSize() {
+        return hotelList.size();
+    }
+
+    public void printHotelList() {
+        System.out.println(hotelList);
+    }
+
+    public ArrayList<Hotel> getHotelList() {
+        return hotelList;
+    }
+
+    public Hotel getCheapestHotel(LocalDate startDate, LocalDate endDate) {
+
+        long numberOfDays = ChronoUnit.DAYS.between(startDate, endDate);
+        Optional<Hotel> sortedHotelList = hotelList.stream().min(Comparator.comparing(Hotel::getRegularCustomerCost));
+        return sortedHotelList.get();
     }
 }
+
