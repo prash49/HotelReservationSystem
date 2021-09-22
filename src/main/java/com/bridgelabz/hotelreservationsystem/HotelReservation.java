@@ -9,11 +9,10 @@ public class HotelReservation implements HotelReservationIF {
     ArrayList<Hotel> hotelList = new ArrayList<Hotel>();
     Hotel hotel;
 
-    public void addHotel(String hotelName, int rating, long regularCustomerRate) {
+    public void addHotel(String hotelName, long regularCustomerRate) {
 
         hotel = new Hotel();
         hotel.setHotelName(hotelName);
-        hotel.setRating(rating);
         hotel.setRegularCustomerCost(regularCustomerRate);
 
         hotelList.add(hotel);
@@ -25,7 +24,10 @@ public class HotelReservation implements HotelReservationIF {
     }
 
     public void printHotelList() {
-        System.out.println(hotelList);
+        for (Hotel list : hotelList) {
+            System.out.println("\tHotel Details: " + list.getHotelName()
+                    + "\t\tRates per regular Customer: " + list.getRegularCustomerCost() + "$");
+        }
     }
 
     public ArrayList<Hotel> getHotelList() {
