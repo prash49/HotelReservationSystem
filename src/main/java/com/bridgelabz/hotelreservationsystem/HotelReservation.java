@@ -9,12 +9,12 @@ public class HotelReservation implements HotelReservationIF {
     ArrayList<Hotel> hotelList = new ArrayList<Hotel>();
     Hotel hotel;
 
-    public void addHotel(String hotelName, long regularCustomerRate) {
+    public void addHotel(String hotelName, long weekDayRegularCustomerRate, long weekendDayRegularCustomerRate) {
 
         hotel = new Hotel();
         hotel.setHotelName(hotelName);
-        hotel.setRegularCustomerCost(regularCustomerRate);
-
+        hotel.setWeekDayRegularCustomerRate(weekDayRegularCustomerRate);
+        hotel.setWeekendDayRegularCustomerRate(weekendDayRegularCustomerRate);
         hotelList.add(hotel);
         System.out.println("Successfully ADDED !!");
     }
@@ -26,7 +26,8 @@ public class HotelReservation implements HotelReservationIF {
     public void printHotelList() {
         for (Hotel list : hotelList) {
             System.out.println("\tHotel Details: " + list.getHotelName()
-                    + "\t\tRates per regular Customer: " + list.getRegularCustomerCost() + "$");
+                    + "\t\tRates per regular Customer: " + "Week day Rate:" + list.getWeekDayRegularCustomerRate() + "$"
+                    + "Weekend day Rate:" + list.getWeekendDayRegularCustomerRate() + "$");
         }
     }
 
@@ -35,9 +36,8 @@ public class HotelReservation implements HotelReservationIF {
     }
 
     public Hotel getCheapestHotel(LocalDate startDate, LocalDate endDate) {
-
         long numberOfDays = ChronoUnit.DAYS.between(startDate, endDate);
-        Optional<Hotel> sortedHotelList = hotelList.stream().min(Comparator.comparing(Hotel::getRegularCustomerCost));
+        Optional<Hotel> sortedHotelList = hotelList.stream().min(Comparator.comparing(Hotel::getWeekDayRegularCustomerRate));
         return sortedHotelList.get();
     }
 }
