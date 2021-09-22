@@ -35,9 +35,15 @@ public class HotelReservation implements HotelReservationIF {
         return hotelList;
     }
 
-    public Hotel getCheapestHotel(LocalDate startDate, LocalDate endDate) {
+    public Hotel getCheapestHotelOnWeekDay(LocalDate startDate, LocalDate endDate) {
         long numberOfDays = ChronoUnit.DAYS.between(startDate, endDate);
         Optional<Hotel> sortedHotelList = hotelList.stream().min(Comparator.comparing(Hotel::getWeekDayRegularCustomerRate));
+        return sortedHotelList.get();
+    }
+
+    public Hotel getCheapestHotelOnWeekEndDay(LocalDate startDate, LocalDate endDate) {
+        long numberOfDays = ChronoUnit.DAYS.between(startDate, endDate);
+        Optional<Hotel> sortedHotelList = hotelList.stream().min(Comparator.comparing(Hotel::getWeekendDayRegularCustomerRate));
         return sortedHotelList.get();
     }
 }
