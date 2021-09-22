@@ -9,12 +9,12 @@ public class HotelReservation implements HotelReservationIF {
     ArrayList<Hotel> hotelList = new ArrayList<Hotel>();
     Hotel hotel;
 
-    public void addHotel(String hotelName, long weekDayRegularCustomerRate, long weekendDayRegularCustomerRate) {
-
+    public void addHotel(String hotelName, long weekDayRegularCustomerRate, long weekendDayRegularCustomerRate, int rating) {
         hotel = new Hotel();
         hotel.setHotelName(hotelName);
         hotel.setWeekDayRegularCustomerRate(weekDayRegularCustomerRate);
         hotel.setWeekendDayRegularCustomerRate(weekendDayRegularCustomerRate);
+        hotel.setRating(rating);
         hotelList.add(hotel);
         System.out.println("Successfully ADDED !!");
     }
@@ -25,7 +25,7 @@ public class HotelReservation implements HotelReservationIF {
 
     public void printHotelList() {
         for (Hotel list : hotelList) {
-            System.out.println("\tHotel Details: " + list.getHotelName()
+            System.out.println("\tHotel Details: " + list.getHotelName() + ("  " + list.getRating() + "*'s")
                     + "\t\tRates per regular Customer: " + "Week day Rate:" + list.getWeekDayRegularCustomerRate() + "$"
                     + "Weekend day Rate:" + list.getWeekendDayRegularCustomerRate() + "$");
         }

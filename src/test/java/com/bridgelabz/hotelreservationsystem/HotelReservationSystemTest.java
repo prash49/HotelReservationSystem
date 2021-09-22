@@ -15,9 +15,9 @@ public class HotelReservationSystemTest {
     @Test
     public void givenHotelDetails_WhenValuesEnteredAreCorrect_ShouldReturnTrue() {
         HotelReservationIF hotelReservation = new HotelReservation();
-        hotelReservation.addHotel("Lakewood", 110, 90);
-        hotelReservation.addHotel("Bridgewood", 150, 50);
-        hotelReservation.addHotel("Ridgewood", 220, 150);
+        hotelReservation.addHotel("Lakewood", 110, 90, 3);
+        hotelReservation.addHotel("Bridgewood", 150, 50, 4);
+        hotelReservation.addHotel("Ridgewood", 220, 150, 5);
         int hotelListSize = hotelReservation.getHotelListSize();
         hotelReservation.printHotelList();
         Assert.assertEquals(3, hotelListSize);
@@ -26,17 +26,26 @@ public class HotelReservationSystemTest {
     @Test
     public void givenHotelList_WhenAdded_shouldReturnProperHotelName() {
         HotelReservationIF hotelReservation = new HotelReservation();
-        hotelReservation.addHotel("Bridgewood", 150, 50);
+        hotelReservation.addHotel("Bridgewood", 150, 50, 4);
         String hotelName = hotelReservation.getHotelList().get(0).getHotelName();
         Assert.assertEquals("Bridgewood", hotelName);
         System.out.println(hotelName);
     }
 
+    @Test
+    public void givenHotelList_WhenAdded_shouldReturnProperHotelRating() {
+        HotelReservationIF hotelReservation = new HotelReservation();
+        hotelReservation.addHotel("Bridgewood", 150, 50, 4);
+        int hotelRating = hotelReservation.getHotelList().get(0).getRating();
+        Assert.assertEquals(4, hotelRating);
+        System.out.println(hotelRating + "*'s");
+
+    }
 
     @Test
     public void givenHotelList_WhenAdded_shouldReturnProperHotelRegularCustomerCost() {
         HotelReservationIF hotelReservation = new HotelReservation();
-        hotelReservation.addHotel("Bridgewood", 150, 50);
+        hotelReservation.addHotel("Bridgewood", 150, 50, 4);
         int hotelRegularCustomerCost = (int) hotelReservation.getHotelList().get(0).getWeekDayRegularCustomerRate();
         Assert.assertEquals(150, hotelRegularCustomerCost);
         System.out.println(hotelRegularCustomerCost);
@@ -46,9 +55,9 @@ public class HotelReservationSystemTest {
     public void givenHotelDetails_shouldReturnCheapestHotel() {
 
         HotelReservation hotelReservation = new HotelReservation();
-        hotelReservation.addHotel("Lakewood", 110, 90);
-        hotelReservation.addHotel("Bridgewood", 150, 50);
-        hotelReservation.addHotel("RidgeWood", 220, 150);
+        hotelReservation.addHotel("Lakewood", 110, 90, 3);
+        hotelReservation.addHotel("Bridgewood", 150, 50, 4);
+        hotelReservation.addHotel("RidgeWood", 220, 150, 5);
         LocalDate startDate = LocalDate.of(2020, Month.SEPTEMBER, 11);
         LocalDate endDate = LocalDate.of(2020, Month.SEPTEMBER, 12);
         Hotel hotelonWeekDays = hotelReservation.getCheapestHotelOnWeekDay(startDate, endDate);
